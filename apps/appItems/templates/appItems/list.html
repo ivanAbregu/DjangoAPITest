@@ -1,0 +1,53 @@
+{% extends "appItems/base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<div id="app" class="ex1">
+  {% verbatim %}
+<div class="card card-transparent">
+
+            <div class="card-block">
+  <div class="card-block">
+        <div >
+            <table id="myDataTable" class="table table-hover" cellspacing="0" width="60%">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>SIZE</th>
+                    <th>DESCRIPTION</th>
+                    <th>COST</th>
+                    <!--th></th-->
+                </tr>
+                </thead>
+                <tbody >
+                <paginate ref="paginator" name="items" :list="items" :per="5">
+                    <tr v-for="a in paginated('items')" class='tr1' v-on:click="onSelectItem(a)"  v-bind:id="a.id" v-bind:style="{ color: a.color}">
+                        <td>{{ a.id }}</td>
+                        <td>
+                            {{ a.name }}
+                        </td>
+                        <td>
+                            {{ a.size }}
+                        </td>
+                        <td>
+                            {{ a.description }}
+                        </td>
+                        <td>
+                            $ {{ a.cost }}
+                        </td>
+                        <!--td>
+                          <button type="button" @click="removeRow(a)" class="btn btn-primary ">delete</button>
+                        </td-->
+                    </tr>
+                </paginate>
+                </tbody>
+            </table>
+            <div align="center" >
+              <paginate-links for="items" :limit="7" :show-step-links="true" v-if="items.length > 0" ></paginate-links>
+          </div>
+        </div>
+    </div>
+  {% endverbatim %}
+</div>
+{% endblock %}
